@@ -1,23 +1,38 @@
+// 1.5 modified version
 const App = () => {
+  const course = {
+    name: "Half Stack application development",
+    parts: [
+      {
+        name: "Fundamentals of React",
+        exercises: 10,
+      },
+      {
+        name: "Using props to pass data",
+        exercises: 7,
+      },
+      {
+        name: "State of a component",
+        exercises: 14,
+      },
+    ],
+  };
+
+
   return (
     <div>
-      <Header course="Half Stack application development" />
-      <Content
-        part1="Fundamentals of React"
-        exercises1={10}
-        part2="Using props to pass data"
-        exercises2={7}
-        part3="State of a component"
-        exercises3={14}
-      />
-      <Total exercises1={10} exercises2={7} exercises3={14} />
+      <Header course={course.name} />
+      {/* the left 'course' is prop name, the right {course} is variable name defined in App */}
+      <Content parts={course.parts} />
+      <Total parts={course.parts} />
     </div>
   );
 };
+
 const Part = (props) => {
   return (
     <p>{props.part} {props.exercise}</p>
-  )
+  );
 }
 
 const Header = (props) => {
@@ -25,24 +40,29 @@ const Header = (props) => {
     <div>
       <h1>{props.course}</h1>
     </div>
-  )
+  );
 }
 
 const Content = (props) => {
   return (
     <div>
-      <Part part={props.part1} exercise={props.exercises1} />
-      <Part part={props.part2} exercise={props.exercises2} />
-      <Part part={props.part3} exercise={props.exercises3} />
+      <Part part={props.parts[0].name} exercise={props.parts[0].exercises} />
+      <Part part={props.parts[1].name} exercise={props.parts[1].exercises} />
+      <Part part={props.parts[2].name} exercise={props.parts[2].exercises} />
     </div>
-  );
+  )
 };
 
 const Total = (props) => {
   return (
     <div>
-      <p>Number of exercises {props.exercises1 + props.exercises2 + props.exercises3}</p>
+      <p>Number of exercises {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}</p>
     </div>
   );
 }
+
 export default App;
+
+
+
+
